@@ -15,10 +15,10 @@ mongoose.connect(mongoURI);
 // User model
 const UserSchema = new mongoose.Schema({
   username: String,
-  password: String,
   age: Number,
   height: Number,
   weight: Number,
+  password: String,
 });
 const User = mongoose.model("User", UserSchema);
 
@@ -41,10 +41,10 @@ app.post('/register', async (req, res) => {
         const hashedPassword = bcrypt.hashSync(req.body.password, 8);
         const user = new User({
             username: req.body.username,
-            password: hashedPassword,
             age: req.body.age,
             height: req.body.height,
-            weight: req.body.weight
+            weight: req.body.weight,
+            password: hashedPassword
         });
         await user.save();
         res.status(201).send('User registered successfully');

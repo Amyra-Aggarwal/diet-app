@@ -43,10 +43,10 @@ export default function Signup() {
       
       const response = await axios.post("http://localhost:3000/register", {
         username: username,
-        password: password,
         age: age,
         height: height,
-        weight: weight
+        weight: weight,
+        password: password
       })
       if (response.status === 201) {
         navigate("/login");
@@ -77,7 +77,7 @@ export default function Signup() {
           <label>Password</label>
           <input type="password" value={password} onChange={handlePassword}></input>
           <br></br>
-          <p>Already have an account? <Link to="/login">Login</Link></p>
+          <p>Already have an account?<Link to="/login">Login</Link></p>
           <br></br>
           <button type="submit">Submit</button>
         </form>
