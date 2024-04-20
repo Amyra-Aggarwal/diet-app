@@ -46,13 +46,13 @@ export default function Login() {
       <div className="login-container">
         <h1>Login </h1>
         <form onSubmit={handleFormData}>
-          <label>Username :</label>
+          <label>Username</label>
           <input type="text" value={username} onChange={handleUsername}></input>
           <br></br>
-          <label>Password :</label>
+          <label>Password</label>
           <input type="password" value={password} onChange={handlePassword}></input>
           <br></br>
-          <p>Don't have an account? <Link to="/register">Register</Link></p>
+          <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
           <br></br>
           <button type="submit">Submit</button>
           <h3 className="login-error">{loginErr}</h3>
