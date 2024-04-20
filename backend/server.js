@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 app.use(express.json());
@@ -54,7 +55,6 @@ app.post('/register', async (req, res) => {
     }
 });
 
-
 // Login user
 app.post("/login", async (req, res) => {
   try {
@@ -70,6 +70,31 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// Proxy route for fetching OAuth token
+app.post("/get-token", async (req, res) => {
+  try {
+    const clientID = "7923bb89015b44aebcaa124a7e2531a6";
+    const clientSecret = "4a3a20a67942462bae8b99556eac4fbb";
+
+    const response = await axios.post("https://oauth.fatsecret.com/connect/token", {
+      grant_type: "client_credentials",
+      scope: "basic",
+    }, {
+      auth: {
+        username: clientID,
+        password: clientSecret
+      },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching token");
+  }
+});
 
 const port = 3000;
 app.listen(port, () => {
