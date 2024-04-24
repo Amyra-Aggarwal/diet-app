@@ -18,8 +18,8 @@ export default function SearchFoods() {
       axios
         .post("http://localhost:3000/get-foods", { foodName: foodName })
         .then((response) => {
-          setFoods(response.data);
-          console.log(response.data);
+          const foods = response.data.foods.food;
+          setFoods(foods);
         })
         .catch((error) => {
           console.error(error);
@@ -35,23 +35,15 @@ export default function SearchFoods() {
     <>
       <form className="form" onSubmit={fetchFoods}>
         <label className="label" htmlFor="">
-          Food Name
+          Food Name :{" "}
         </label>
-        <input
-          className="input"
-          name="query"
-          type="text"
-          placeholder="Enter the Food name"
-          value={foodName}
-          onChange={handleInput}
-        />
-        <button className="button" type="submit">
-          Search
-        </button>
+        <input className="input" name="query" type="text" placeholder="Enter the Food name" value={foodName} onChange={handleInput}/>
+        <br></br>
+        <button className="button" type="submit">Search</button>
       </form>
       <div>
         {foods.length === 0 ? (
-          <p>No foods found.</p>
+          <p></p>
         ) : (
           foods.map((food) => <FoodCard data={food} key={food.food_id} />)
         )}
