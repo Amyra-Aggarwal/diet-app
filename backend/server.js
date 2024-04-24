@@ -106,7 +106,7 @@ app.post("/get-token", async (req, res) => {
   }
 });
 
-// Route to fetch Api data
+// Route to fetch food Api data
 app.post('/get-foods', async (req, res) => {
   const { foodName } = req.body;
   try {
@@ -117,7 +117,26 @@ app.post('/get-foods', async (req, res) => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch foods' });
+  }
+});
+
+// Route to fetch recipes Api data
+app.post('/get-recipes', async (req, res) => {
+  const recipeName = req.body;
+  try {
+    const { access_token } = await Token.findOne({});
+    const url = `https://platform.fatsecret.com/rest/server.api?method=recipes.search.v3&search_expression=${recipeName}&format=json&max_results=50`;
+    const response = await axios.post(url, {}, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
     res.json(response.data);
   } catch (error) {
     console.error(error);

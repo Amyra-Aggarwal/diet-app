@@ -19,6 +19,7 @@ export default function SearchFoods() {
         .post("http://localhost:3000/get-foods", { foodName: foodName })
         .then((response) => {
           const foods = response.data.foods.food;
+          console.log(foods);
           setFoods(foods);
         })
         .catch((error) => {
