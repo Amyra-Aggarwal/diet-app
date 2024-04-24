@@ -96,6 +96,27 @@ app.post("/get-token", async (req, res) => {
   }
 });
 
+// Route to fetch Api data
+app.post('/get-foods', (req, res) => {
+  const { foodName } = req.body;
+  const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4NDUzNUJFOUI2REY5QzM3M0VDNUNBRTRGMEJFNUE2QTk3REQ3QkMiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJTRVUxdnB0dC1jTno3Rnl1VHd2bHBxbDkxN3cifQ.eyJuYmYiOjE3MTM5NDMzODAsImV4cCI6MTcxNDAyOTc4MCwiaXNzIjoiaHR0cHM6Ly9vYXV0aC5mYXRzZWNyZXQuY29tIiwiYXVkIjoiYmFzaWMiLCJjbGllbnRfaWQiOiI3OTIzYmI4OTAxNWI0NGFlYmNhYTEyNGE3ZTI1MzFhNiIsInNjb3BlIjpbImJhc2ljIl19.0Pic0ZWlVOeDSPHPqP3dj--SOeXBwLLSm1lw-UiVZJPivLWopENmPv5ZiI8RosF4M-Hoahkrx6515t-avZa7ZW1Hub6shRpPnVg4eN0hXxON8hKzrLryZgDO7zU6anTPP3hMT7YVDCZDj-rb0RtGUqOFbEd-HNdHNzZg9dMiMp425dQTZN4wo3d2WhJeu_i0oB6nLGDAab6Bmczi0rLJHAVo2BSh_A1Yip_plNUdAzPjuCic0C8qBrSzPvmTZ8AHnNZe3AMT5OvaUzIybUPjlDyy6YlJheY0daa4ZM_iAV4A-AAQEcqHAHiEX2g0vhclj0bheZSudub06NQ5_in9aw';
+
+  const url = `https://platform.fatsecret.com/rest/server.api?method=foods.search&search_expression=${foodName}&format=json`;
+
+  axios.post(url, {}, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    res.json({ foods: response.data });
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch foods' });
+  });
+});
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
