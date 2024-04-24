@@ -130,7 +130,7 @@ app.post('/get-recipes', async (req, res) => {
   const recipeName = req.body;
   try {
     const { access_token } = await Token.findOne({});
-    const url = `https://platform.fatsecret.com/rest/server.api?method=recipes.search.v3&search_expression=${recipeName}&format=json&max_results=50`;
+    const url = `https://platform.fatsecret.com/rest/server.api?method=recipes.search.v3&search_expression=${recipeName}&format=json`;
     const response = await axios.post(url, {}, {
       headers: {
         Authorization: `Bearer ${access_token}`,
