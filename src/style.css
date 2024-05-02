@@ -1,0 +1,299 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Open Sans', sans-serif;
+    /* background-color: #000; */
+    color: #000000;
+    
+}
+
+
+:root{
+    --text-color: #000000;
+    --bg-color: rgb(255, 255, 255)fff;
+    --main-color: rgb(255, 255, 255);
+
+    --h1-font: 6rem;
+    --h2-font: 3rem;
+    --p-font: 1rem;
+}
+
+body{
+    color: var(--text-color);
+    background: var(--bg-color);
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    background: transparent;
+    padding: 20px 17%;
+    display: flex;
+    justify-content: space-between;
+    transition: all .50s;
+    position: sticky;
+    top: 0;
+    background-color:#4CAF50 ;
+}
+
+.header ul li a{
+  font-weight: bold;
+}
+
+.logo{
+    font-size: 33px;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+span{
+    color: var(--main-color);
+}
+
+.navbar{
+    display: flex;  
+    align-items: center;
+}
+
+.navbar a{
+    color: var(--text-color);
+    font-size: var(--p-font);
+    font-weight: 500;
+    margin: 15px 22px;
+    transition: all .50s ease;
+}
+
+.navbar a:hover{
+    color: var(--main-color);
+}
+
+.navbar ul{
+    color: var(--text-color);
+    font-weight: bold;
+    display: inline;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 1010px; /* Adjust width as needed */
+    background-color: #fff;
+    margin-left: 260px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+  }
+
+  .water{
+    margin-left: 20px;    
+    color: blue;
+  }
+
+  .watercard{
+    display: inline-block;
+  }
+  
+  .card-text {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: -15px;
+  }
+
+  .Daily{
+    font-size: 23px;
+    color: var(--text-color);
+    font-weight: 700;
+    margin-left: 700px ;
+  }
+
+  .watercard-actions{
+    margin-left: 600px;
+  }
+
+  .card-actions {
+    margin-left: 250px;
+  }
+
+  .snackscard-actions {
+    margin-left: 280px;
+  }
+
+
+  card-title{
+    margin-right: 15px;
+  }
+
+  
+
+  .cardbody{
+    gap: 20px;
+  }
+
+
+  .food{
+    display: flex;
+    margin-left: 260px;
+    margin-right: 260px;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .foodcard{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 500px; /* Adjust width as needed */
+    background-color: #fff;
+    color: var(--text-color);
+  }
+
+  /* Basic Footer Styling */
+footer {
+    background-color:#4CAF50 ; /* Dark background color */
+    color: #ffffff; /* White text color */
+    padding: 20px; /* Add padding for spacing */
+    text-align: center; /* Center-align text */
+    position: fixed; /* Position footer at the bottom */
+    width: 100%; /* Take full width of the viewport */
+    bottom: 0; /* Stick footer to the bottom */
+}
+
+footer p {
+    margin-bottom: 10px; /* Add margin below paragraph */
+    margin-left: 30px;
+}
+
+footer nav ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin-left: 210px;
+}
+
+footer nav ul li {
+    display: inline; /* Display list items horizontally */
+    margin-right: 250px; /* Add margin between list items */
+}
+
+footer nav ul li a {
+    color: #fff; /* White text color for links */
+    text-decoration: none; /* Remove underline from links */
+}
+
+footer nav ul li a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+
+/* Style for the main content */
+.content {
+    /* Add padding to ensure content isn't hidden by the fixed footer */
+    padding-bottom: 60px; /* Adjust according to footer height */
+}
+
+.text{
+  display: flex;
+}
+
+/* ____________________________________________________________ */
+
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+.wrapper{
+  width: 450px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+.wrapper header{
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+header .icons{
+  display: flex;
+}
+header .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.icons span:last-child{
+  margin-right: -10px;
+}
+header .icons span:hover{
+  background: #f2f2f2;
+}
+header .current-date{
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.calendar{
+  padding: 20px;
+}
+.calendar ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar .days{
+  margin-bottom: 20px;
+}
+.calendar li{
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+}
+.calendar .weeks li{
+  font-weight: 500;
+  cursor: default;
+}
+.calendar .days li{
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+}
+.days li.inactive{
+  color: #aaa;
+}
+.days li.active{
+  color: #fff;
+}
+.days li::before{
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.days li.active::before{
+  background: #9B59B6;
+}
+.days li:not(.active):hover::before{
+  background: #f2f2f2;
+}
