@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diet Plan Generator</title>
+  <style>
+    /* General styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Container styling */
+    .container {
+      max-width: 600px; 
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form styling */
+    .input-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: calc(33.33% - 10px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 20px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Card styling */
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      padding: 5px 0;
+    }
+
+    /* Heading styling */
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Your diet planner</h1>
+    <form id="dietForm">
+      <div class="input-container">
+        <input type="number" id="currentWeight" name="currentWeight" required placeholder="Current Weight (kg)">
+        <input type="number" id="height" name="height" required placeholder="Height (cm)">
+        <input type="number" id="idealWeight" name="idealWeight" required placeholder="Ideal Weight (kg)">
+      </div>
+      <button type="submit">Generate Diet Plan</button>
+    </form>
+
+    <div id="responseContainer"></div>
+  </div>
+
+  <script>
+    document.getElementById('dietForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const currentWeight = document.getElementById('currentWeight').value;
+      const height = document.getElementById('height').value;
+      const idealWeight = document.getElementById('idealWeight').value;
+
+      const response = await fetch('http://localhost:2500/generate-diet-plan', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ currentWeight, height, idealWeight })
+      });
+
+      const result = await response.json();
+      displayResponse(result.dietPlan);
+    });
+
+    function displayResponse(dietPlan) {
+      const responseContainer = document.getElementById('responseContainer');
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      dietPlan.forEach(line => {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = line.trim();
+        card.appendChild(paragraph);
+      });
+
+      responseContainer.innerHTML = '';
+      responseContainer.appendChild(card);
+    }
+  </script>
+</body>
+</html>
