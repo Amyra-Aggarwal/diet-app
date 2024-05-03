@@ -57,7 +57,6 @@ export default function Login() {
           <button type="submit">Submit</button>
           <h3 className="login-error">{loginErr}</h3>
         </form>
-        
       </div>
     </div>
   );
