@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-// import Navbar from './Navbar';
+import Navbar from './Navbar';
 import './login.css';
 
 export default function Login() {
@@ -42,7 +42,7 @@ export default function Login() {
 
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="login-container">
         <h1>Login </h1>
         <form onSubmit={handleFormData}>
