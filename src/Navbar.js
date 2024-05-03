@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css';
+import './Navbar.css';
 import { useState } from 'react';
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
@@ -22,7 +22,11 @@ const Navbar = () => {
   return (
     <div className='header'>
         <li><a href="#" className="logo">Fit<span>Fuel</span></a></li>  
-        <li><a href=''><FaCalendarAlt style={{ fontSize: '24px' , alignItems : 'cen' }}/> {currentDate.month} {currentDate.date}, {currentDate.day}</a></li>
+        <li><a href=''>
+          <div className="sv">  <FaCalendarAlt style={{ fontSize: '24px'}}/> 
+          <div className='date'>
+           {currentDate.month} {currentDate.date}, {currentDate.day}</div>
+          </div></a> </li>
         <ul class="navbar">
           <li><a href=''>Hi, <FaCircleUser style={{ fontSize: '24px' }}/></a></li>
           <li><a href=''> Log Out</a></li>

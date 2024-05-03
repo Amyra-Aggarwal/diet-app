@@ -1,0 +1,117 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Open Sans', sans-serif;
+    /* background-color: #000; */
+    color: #000000;
+  
+  }
+  
+  
+  :root {
+    --text-color: #000000;
+    --bg-color: rgb(255, 255, 255)fff;
+    --main-color: rgb(255, 255, 255);
+  
+    --h1-font: 6rem;
+    --h2-font: 3rem;
+    --p-font: 1rem;
+  }
+  
+  body {
+    color: var(--text-color);
+    background: var(--bg-color);
+  }
+  
+
+
+/* ///////////////////////Body////////////////////////////////// */
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 1010px;
+    /* Adjust width as needed */
+    background-color: #fff;
+    margin-left: 260px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+  }
+  
+  .water {
+    margin-left: 20px;
+  }
+  
+  .watercard {
+    display: inline-block;
+  }
+  
+  .card-text {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: -15px;
+  }
+  
+  .Daily {
+    font-size: 23px;
+    color: var(--text-color);
+    font-weight: 700;
+    margin-left: 700px;
+  }
+
+  .green-icon{
+    color: #4CAF50;
+  }
+  
+  .watercard-actions {
+    margin-left: 600px;
+  }
+  
+  .card-actions {
+    margin-left: 250px;
+  }
+  
+  .snackscard-actions {
+    margin-left: 280px;
+  }
+  
+  
+  card-title {
+    margin-right: 15px;
+  }
+  
+  .cardbody {
+    gap: 20px;
+  }
+  
+  
+  .food {
+    display: flex;
+    margin-left: 260px;
+    margin-right: 260px;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .foodcard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 500px;
+    background-color: #fff;
+    color: var(--text-color);
+  }
+  
+  .text {
+    display: flex;
+  }
+  

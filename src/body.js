@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './body.css';
 import { CgAdd } from "react-icons/cg";
 
 const Body = () => {
@@ -10,7 +10,9 @@ const Body = () => {
           <div className='text'>
             <h1 className="Water">Water</h1>
             <div className="watercard-actions">
+              <a href=''>
             <CgAdd style={{ fontSize: '54px' }} />
+            </a>
             </div>
           </div>
             <p className="card-text">Recommeded until now 1.4L</p>
@@ -29,7 +31,7 @@ const Body = () => {
           <div className='text'>
             <h1 className="Breakfast">Breakfast</h1>
             <div className="card-actions">
-            <CgAdd style={{ fontSize: '54px', color: 'green' }} />
+            <CgAdd style={{ fontSize: '54px'}} className='green-icon' />
             </div>
           </div> 
           <p className="card-text">Recommeded 447 Kcal</p>

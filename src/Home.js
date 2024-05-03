@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Body from './body'
-import './style.css';
 import Footer from './Footer';
 
 const Home = () => {

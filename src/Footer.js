@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './Footer.css';
 import { FaHome } from "react-icons/fa";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { LuChefHat } from "react-icons/lu";

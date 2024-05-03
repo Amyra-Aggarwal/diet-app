@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './style.css';
+import './cdd.css';
 
 const CalendarDialog = ({ onClose }) => {
     // Add your dialog box content and functionality here
