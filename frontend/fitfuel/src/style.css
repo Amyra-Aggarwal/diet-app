@@ -44,7 +44,7 @@ body {
   transition: all .50s;
   position: sticky;
   top: 0;
-  background-color: #4CAF50;
+  background-color: #6FBF72;
 }
 
 .header ul li a {
@@ -168,8 +168,7 @@ card-title {
 
 /* ---------------------------Footer---------------------------------*/
 footer {
-  background-color: #4CAF50;
-  color: #4CAF50;
+  background-color: #6FBF72;
   padding: 20px;
   text-align: center;
   position: fixed;
