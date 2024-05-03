@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { FaHome } from "react-icons/fa";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { LuChefHat } from "react-icons/lu";
-import { MdOutlineFoodBank } from "react-icons/md";
+import { IoHomeOutline } from "react-icons/io5";
+import { PiChefHat } from "react-icons/pi";
+import { MdMenuBook } from "react-icons/md";
 
 const Footer = () => {
     return (
@@ -12,10 +12,10 @@ const Footer = () => {
             <footer>
                 <nav>
                     <ul>
-                        <li><Link to="/"><FaHome style={{fontSize : '34px'}}/></Link></li>
-                        <li><Link to=""><IoFastFoodOutline style={{fontSize : '34px'}}/></Link></li>
-                        <li><Link to="/recipe"><LuChefHat style={{fontSize : '34px'}}/></Link></li>
-                        <li><Link to=""><MdOutlineFoodBank style={{fontSize : '34px'}}/></Link></li>
+                        <li><Link to="/"><IoHomeOutline style={{fontSize : '34px'}} />Home</Link></li>
+                        <li><Link to="/food"><IoFastFoodOutline style={{fontSize : '34px'}}/>Foods</Link></li>
+                        <li><Link to="/recipe"><PiChefHat style={{fontSize : '34px'}}/>Recipes</Link></li>
+                        <li><Link to="/diet"><MdMenuBook style={{fontSize : '34px'}}/>Diet Plan</Link></li>
                     </ul>
                 </nav>
             </footer>

@@ -158,51 +158,50 @@ span{
     color: var(--text-color);
   }
 
-  /* Basic Footer Styling */
+.text {
+  display: flex;
+}
+
+/* ---------------------------Footer---------------------------------*/
 footer {
-    background-color:#4CAF50 ; /* Dark background color */
-    color: #ffffff; /* White text color */
-    padding: 20px; /* Add padding for spacing */
-    text-align: center; /* Center-align text */
-    position: fixed; /* Position footer at the bottom */
-    width: 100%; /* Take full width of the viewport */
-    bottom: 0; /* Stick footer to the bottom */
+  background-color: #4CAF50;
+  color: #111111;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 footer p {
-    margin-bottom: 10px; /* Add margin below paragraph */
-    margin-left: 30px;
+  margin-bottom: 10px;
 }
 
 footer nav ul {
-    list-style-type: none; /* Remove default bullet points */
-    padding: 0; /* Remove default padding */
-    margin-left: 210px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 33%);
 }
 
 footer nav ul li {
-    display: inline; /* Display list items horizontally */
-    margin-right: 250px; /* Add margin between list items */
+  display: inline-block;
 }
 
 footer nav ul li a {
-    color: #fff; /* White text color for links */
-    text-decoration: none; /* Remove underline from links */
-}
-
-footer nav ul li a:hover {
-    text-decoration: underline; /* Underline links on hover */
-}
-
-/* Style for the main content */
-.content {
-    /* Add padding to ensure content isn't hidden by the fixed footer */
-    padding-bottom: 60px; /* Adjust according to footer height */
-}
-
-.text{
+  color: black;
+  text-decoration: none;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.content {
+  padding-bottom: 80px;
+}
+
 
 /* ____________________________________________________________ */
 

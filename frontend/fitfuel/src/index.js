@@ -6,6 +6,7 @@ import Signup from "./Signup";
 import SearchFoods from "./SearchFoods";
 import SearchRecipes from "./SearchRecipes";
 import Home from "./Home";
+import DietPlanGenerator from "./DietPlanGenerator";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: '/recipe',
     element: <SearchRecipes></SearchRecipes>
+  },
+  {
+    path: '/diet',
+    element: <DietPlanGenerator></DietPlanGenerator>
   }
 ]);
 
