@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import RecipeDetails from './RecipeDetails'; // Import the RecipeDetails component
 import { useNavigate } from 'react-router-dom';
 
 function RecipeCard({ data }) {
-  const Navigate = useNavigate();
-  
-  const sendback = () => {
-    // Navigate('/srecipe');
-  }
+  const navigate= useNavigate();
+
+  const toggleDetails = () => {
+    <RecipeDetails data={data} />
+    navigate('/srecipe')
+  };
 
   return (
     <div className="col-md-3 mb-4 d-flex">
@@ -29,8 +31,9 @@ function RecipeCard({ data }) {
             Protein: {data.recipe_nutrition.protein}
           </Card.Text>
           <div className="mt-auto w-100">
-            <Button variant="success" href={data.source_url} className="w-100" onClick={sendback}>View Recipe</Button>
+            <Button variant="success" onClick={toggleDetails}>View Recipe</Button>
           </div>
+          {/* <RecipeDetails data={data} /> */}
         </Card.Body>
       </Card>
     </div>

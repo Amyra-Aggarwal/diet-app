@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import RecipeCard from "./RecipeCard";
+import FoodCard from "./FoodCard";
 import axios from "axios";
 import MyNavbar from "./Components/MyNavbar";
 import Footer from "./Components/Footer";
-import logo from "./Components/logo.png"; // Import loading image
+import loadingImage from "./Components/logo.png"; // Import loading image
 
-export default function SearchRecipes() {
-  const [recipeName, setRecipeName] = useState("");
-  const [recipes, setRecipes] = useState([]);
+export default function SearchFoods() {
+  const [foodName, setFoodName] = useState("");
+  const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(false); // State to manage loading status
 
-  const fetchRecipes = (event) => {
+  const fetchFoods = (event) => {
     event.preventDefault();
     setLoading(true); // Set loading to true when fetching starts
 
@@ -18,10 +18,10 @@ export default function SearchRecipes() {
       const token = response.data.access_token;
 
       axios
-        .post("http://localhost:3000/get-recipes", { recipeName: recipeName })
+        .post("http://localhost:3000/get-foods", { foodName: foodName })
         .then((response) => {
-          const recipes = response.data.recipes.recipe;
-          setRecipes(recipes);
+          const foods = response.data.foods.food;
+          setFoods(foods);
         })
         .catch((error) => {
           console.error(error);
@@ -33,7 +33,7 @@ export default function SearchRecipes() {
   };
 
   const handleInput = (event) => {
-    setRecipeName(event.target.value);
+    setFoodName(event.target.value);
   };
 
   return (
@@ -41,15 +41,15 @@ export default function SearchRecipes() {
       <MyNavbar />
       <div className="container mt-4">
         <div className="row justify-content-center">
-          <form className="col-md- form d-flex" onSubmit={fetchRecipes}>
+          <form className="col-md- form d-flex" onSubmit={fetchFoods}>
             <input
               className="form-control mr-2"
               name="query"
               type="text"
               placeholder="Search Food"
-              value={recipeName}
+              value={foodName}
               onChange={handleInput}
-              style={{ marginRight: "8px" }}
+              style={{ marginRight: "8px" }} // Add 5px margin to the right
             />
             <button className="btn btn-success" type="submit">
               Search
@@ -58,10 +58,10 @@ export default function SearchRecipes() {
         </div>
         <div className="row justify-content-center mt-4">
           {loading ? ( // Conditional rendering for loading state
-            <img src={logo} alt="Loading" style={{ width: "500px", height: "500px" }}/> // Display loading image
+            <img src={loadingImage} alt="Loading" style={{ width: "500px", height: "500px" }} /> // Display loading image with specified dimensions
           ) : (
-            recipes.map((recipe) => (
-              <RecipeCard key={recipe.recipe_id} data={recipe} />
+            foods.map((food) => (
+              <FoodCard key={food.food_id} data={food} />
             ))
           )}
         </div>

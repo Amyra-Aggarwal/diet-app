@@ -5,7 +5,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import SearchFoods from "./SearchFoods";
 import SearchRecipes from "./SearchRecipes";
-import Specificrecipe from "./Specificrecipe";
+import RecipeDetails from "./RecipeDetails";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/srecipe',
-    element: <Specificrecipe></Specificrecipe>
+    element: <RecipeDetails></RecipeDetails>
   },
 
 ]);
