@@ -1,34 +1,75 @@
-import React, { useState } from 'react';
-import { FaCalendarAlt, FaUserCircle } from "react-icons/fa";
-import './style.css';
-import Logout from './Logout';
+import React from 'react';
+import { Navbar as BootstrapNavbar, Container, Nav, Dropdown } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-function getDate() {
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const Days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const today = new Date();
-  const monthIndex = today.getMonth();
-  const DayIndex = today.getDay();
-  const month = months[monthIndex];
-  const day = Days[DayIndex];
-  const date = today.getDate();
-  return { month, date, day };
-}
+export default function Navbar() {
 
-const Navbar = () => {
-  const [currentDate, setCurrentDate] = useState(getDate());
+  const navigate= useNavigate();
+  const [username, setUsername] = useState("");
+  const currentDate = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const token = localStorage.getItem('jwtToken');
+
+        if (!token) {
+          console.error("Token not found in local storage");
+          return;
+        }
+
+        const response = await axios.get("http://localhost:3000/getusername", {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        const data = response.data;
+        setUsername(data.username);
+      } catch (error) {
+        console.error("Error fetching username:", error);
+      }
+    };
+
+    fetchUsername();
+  }, []);
+
+  const handleLogout = () => {
+    navigate('/login')
+    localStorage.removeItem('jwtToken');
+     };
+
   return (
-    <div className='header'>
-      <ul>
-        <li><a href="#" className="logo">Fit<span>Fuel</span></a></li>  
-        <li><a href=''><FaCalendarAlt style={{ fontSize: '24px', alignItems: 'center' }}/> {currentDate.month} {currentDate.date}, {currentDate.day}</a></li>
-      </ul>
-      <ul className="navbar">
-        <li><a href=''>Hi, <FaUserCircle style={{ fontSize: '24px' }}/></a></li>
-        <li><Logout /></li>
-      </ul>
-    </div>
+    <BootstrapNavbar bg="success" variant="dark" expand="lg">
+      <Container fluid>
+        <BootstrapNavbar.Brand as={Link} to="/" className="text-light"> 
+          <span style={{ fontWeight: 'bold', fontSize: 'xx-large',fontFamily: 'Itim' }}>
+            <span style={{ color: 'black', fontSize: 'xxx-large' }}>FIT</span>
+            <span style={{ color: 'orange' }}>fuel</span>
+          </span>
+        </BootstrapNavbar.Brand>
+        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
+        <BootstrapNavbar.Collapse id="basic-navbar-nav" className="justify-content-between">
+          <Nav>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/food">Food</Nav.Link>
+            <Nav.Link as={Link} to="/recipe">Recipes</Nav.Link>
+            <Nav.Link as={Link} to="/dietplan">Diet Plan</Nav.Link>
+          </Nav>
+          <div className="text-light mx-auto">{currentDate}</div>
+          <Nav>
+            <Dropdown align="end">
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Hi, {username}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Nav>
+        </BootstrapNavbar.Collapse>
+      </Container>
+    </BootstrapNavbar>
   );
 }
-
-export default Navbar;

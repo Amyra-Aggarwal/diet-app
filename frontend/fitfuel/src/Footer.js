@@ -1,27 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './style.css';
-import { IoFastFoodOutline } from "react-icons/io5";
-import { IoHomeOutline } from "react-icons/io5";
-import { PiChefHat } from "react-icons/pi";
-import { MdMenuBook } from "react-icons/md";
+import React from 'react'
 
-const Footer = () => {
-    return (
-        <div>
-            <footer>
-                <nav>
-                    <ul>
-                        <li><Link to="/"><IoHomeOutline style={{fontSize : '34px'}} />Home</Link></li>
-                        <li><Link to="/food"><IoFastFoodOutline style={{fontSize : '34px'}}/>Foods</Link></li>
-                        <li><Link to="/recipe"><PiChefHat style={{fontSize : '34px'}}/>Recipes</Link></li>
-                        <li><Link to="/diet"><MdMenuBook style={{fontSize : '34px'}}/>Diet Plan</Link></li>
-                    </ul>
-                </nav>
-            </footer>
-
-        </div>
-    )
+export default function Footer() {
+  return (
+    <div>
+    <div class="container">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+      </ul>
+      <p class="text-center text-muted">© 2024 Fitfuel, Inc</p>
+    </footer>
+  </div>
+  </div>
+  )
 }
-
-export default Footer

@@ -77,6 +77,25 @@ app.post("/login", async (req, res) => {
   }
 });
 
+//get username
+app.get('/getusername', verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    const username = user.username;
+    res.status(200).json({ username });
+  } catch (error) {
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).send('Invalid token');
+    }
+    res.status(500).send('Error fetching username');
+  }
+});
+
 // Proxy route for fetching OAuth token
 app.post("/get-token", async (req, res) => {
   try {
@@ -85,7 +104,7 @@ app.post("/get-token", async (req, res) => {
 
     const response = await axios.post("https://oauth.fatsecret.com/connect/token", {
       grant_type: "client_credentials",
-      scope: "basic",
+      scope: "premier",
     }, {
       auth: {
         username: clientID,
@@ -112,7 +131,7 @@ app.post('/get-foods', async (req, res) => {
   const { foodName } = req.body;
   try {
     const { access_token } = await Token.findOne({});
-    const url = `https://platform.fatsecret.com/rest/server.api?method=foods.search&search_expression=${foodName}&format=json&max_results=50`;
+    const url = `https://platform.fatsecret.com/rest/server.api?method=foods.search.v3&search_expression=${foodName}&format=json&max_results=50`;
     const response = await axios.post(url, {}, {
       headers: {
         Authorization: `Bearer ${access_token}`,
@@ -146,32 +165,32 @@ app.post('/get-recipes', async (req, res) => {
 });
 
 // Diet Plan Gemini Api
-const genAI = new GoogleGenerativeAI("AIzaSyDp-tmArVcZ9EcHdowr0Xe-2it1Yb8Zv2s");
+// const genAI = new GoogleGenerativeAI("AIzaSyDp-tmArVcZ9EcHdowr0Xe-2it1Yb8Zv2s");
 
-app.post('/generate-diet-plan', async (req, res) => {
-    const { currentWeight, height, idealWeight, userId } = req.body;
+// app.post('/generate-diet-plan', async (req, res) => {
+//     const { currentWeight, height, idealWeight, userId } = req.body;
 
-    const bmi = (currentWeight / (height * height)) * 10000;
-    const nbmi = (idealWeight / (height * height)) * 10000;
+//     const bmi = (currentWeight / (height * height)) * 10000;
+//     const nbmi = (idealWeight / (height * height)) * 10000;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    const prompt = `Current BMI: ${bmi}\n\nGoal BMI: ${nbmi}\n\nCalorie Deficit Required: Between 500-750 calories per day\n\nDiet Plan\n\nBreakfast\n- Oatmeal with berries and nuts (1 cup oatmeal, 1/2 cup berries, 1/4 cup nuts)\n- Greek yogurt with fruit and granola (1 cup yogurt, 1/2 banana, 1/4 cup granola)\n- Whole-wheat toast with avocado and eggs (2 slices toast, 1/2 avocado, 2 eggs)\n\nLunch\n- Salad with grilled chicken, vegetables, and quinoa (1 cup salad mix, 1/2 cup grilled chicken, 1 cup vegetables, 1/2 cup quinoa)\n- Sandwich on whole-wheat bread with lean protein, vegetables, and low-fat cheese (2 slices bread, 1/4 cup protein, 1 cup vegetables, 1/4 cup cheese)\n- Leftovers from dinner\n\nDinner\n- Grilled salmon with roasted vegetables (4 ounces salmon, 1 cup roasted vegetables)\n- Vegetarian chili with whole-wheat bread (1 bowl chili, 1 slice bread)\n- Chicken stir-fry with brown rice (1 cup stir-fry, 1/2 cup brown rice)\n\nSnacks\n- Fruits (apple, banana, orange)\n- Vegetables (carrots, celery, cucumbers)\n- Air-popped popcorn\n- Nuts (1/4 cup)\n\nHydration\n- Drink plenty of water throughout the day\n- Avoid sugary drinks\n\nAdditional Tips\n- Cook meals at home more often to control calorie intake\n- Read food labels carefully and choose foods low in calories and fat\n- Limit processed foods, sugary snacks, and unhealthy fats\n- Exercise regularly\n- Consult a registered dietitian or your healthcare provider for personalized guidance\n\nNote: This is just a sample diet plan, and individual needs may vary. Adjust caloric intake and food choices as needed to achieve a calorie deficit of 500-750 calories per day.`;
+//     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+//     const prompt = `Current BMI: ${bmi}\n\nGoal BMI: ${nbmi}\n\nCalorie Deficit Required: Between 500-750 calories per day\n\nDiet Plan\n\nBreakfast\n- Oatmeal with berries and nuts (1 cup oatmeal, 1/2 cup berries, 1/4 cup nuts)\n- Greek yogurt with fruit and granola (1 cup yogurt, 1/2 banana, 1/4 cup granola)\n- Whole-wheat toast with avocado and eggs (2 slices toast, 1/2 avocado, 2 eggs)\n\nLunch\n- Salad with grilled chicken, vegetables, and quinoa (1 cup salad mix, 1/2 cup grilled chicken, 1 cup vegetables, 1/2 cup quinoa)\n- Sandwich on whole-wheat bread with lean protein, vegetables, and low-fat cheese (2 slices bread, 1/4 cup protein, 1 cup vegetables, 1/4 cup cheese)\n- Leftovers from dinner\n\nDinner\n- Grilled salmon with roasted vegetables (4 ounces salmon, 1 cup roasted vegetables)\n- Vegetarian chili with whole-wheat bread (1 bowl chili, 1 slice bread)\n- Chicken stir-fry with brown rice (1 cup stir-fry, 1/2 cup brown rice)\n\nSnacks\n- Fruits (apple, banana, orange)\n- Vegetables (carrots, celery, cucumbers)\n- Air-popped popcorn\n- Nuts (1/4 cup)\n\nHydration\n- Drink plenty of water throughout the day\n- Avoid sugary drinks\n\nAdditional Tips\n- Cook meals at home more often to control calorie intake\n- Read food labels carefully and choose foods low in calories and fat\n- Limit processed foods, sugary snacks, and unhealthy fats\n- Exercise regularly\n- Consult a registered dietitian or your healthcare provider for personalized guidance\n\nNote: This is just a sample diet plan, and individual needs may vary. Adjust caloric intake and food choices as needed to achieve a calorie deficit of 500-750 calories per day.`;
 
-    try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = await response.text();
+//     try {
+//         const result = await model.generateContent(prompt);
+//         const response = await result.response;
+//         let text = await response.text();
 
-        text = text.replace(/\*\*/g, '');
+//         text = text.replace(/\*\*/g, '');
 
-        const lines = text.split('\n');
+//         const lines = text.split('\n');
 
-        res.json({ dietPlan: lines });
-    } catch (error) {
-        console.error("Error generating diet plan:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
+//         res.json({ dietPlan: lines });
+//     } catch (error) {
+//         console.error("Error generating diet plan:", error);
+//         res.status(500).json({ error: "Internal Server Error" });
+//     }
+// });
 
 const port = 3000;
 app.listen(port, () => {

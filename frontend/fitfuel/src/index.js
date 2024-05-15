@@ -5,14 +5,15 @@ import Login from "./Login";
 import Signup from "./Signup";
 import SearchFoods from "./SearchFoods";
 import SearchRecipes from "./SearchRecipes";
-import Home from "./Home";
-import DietPlanGenerator from "./DietPlanGenerator";
+// import Home from "./Home";
+// import DietPlanGenerator from "./DietPlanGenerator";
+import RecipeDetails from "./RecipeDetails";
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home></Home>,
-  },
+  // {
+  //   path: '/',
+  //   element: <Home></Home>,
+  // },
   {
     path: '/login',
     element: <Login></Login>,
@@ -29,9 +30,13 @@ const router = createBrowserRouter([
     path: '/recipe',
     element: <SearchRecipes></SearchRecipes>
   },
+  // {
+  //   path: '/diet',
+  //   element: <DietPlanGenerator></DietPlanGenerator>
+  // },
   {
-    path: '/diet',
-    element: <DietPlanGenerator></DietPlanGenerator>
+    path: '/srecipe',
+    element: <RecipeDetails></RecipeDetails>
   }
 ]);
 
