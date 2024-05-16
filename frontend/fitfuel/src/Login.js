@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import backg from './Components/try.jpg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Login() {
   const navigate = useNavigate();

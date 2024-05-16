@@ -4,6 +4,7 @@ import axios from "axios";
 import Footer from "./Footer";
 import logo from "./Components/logo.png";
 import Navbar from "./Navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function SearchRecipes() {
   const [recipeName, setRecipeName] = useState("");

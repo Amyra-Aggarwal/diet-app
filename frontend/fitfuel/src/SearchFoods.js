@@ -4,6 +4,7 @@ import axios from "axios";
 import loadingImage from "./Components/logo.png";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function SearchFoods() {
   const [foodName, setFoodName] = useState("");

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Navbar() {
 
