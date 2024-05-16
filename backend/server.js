@@ -131,7 +131,7 @@ app.post('/get-foods', async (req, res) => {
   const { foodName } = req.body;
   try {
     const { access_token } = await Token.findOne({});
-    const url = `https://platform.fatsecret.com/rest/server.api?method=foods.search.v3&search_expression=${foodName}&format=json&max_results=50`;
+    const url = `https://platform.fatsecret.com/rest/server.api?method=foods.search.v3&search_expression=${foodName}&format=json&include_food_images=true&max_results=50`;
     const response = await axios.post(url, {}, {
       headers: {
         Authorization: `Bearer ${access_token}`,
