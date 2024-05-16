@@ -56,7 +56,7 @@ export default function Navbar() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/food">Food</Nav.Link>
             <Nav.Link as={Link} to="/recipe">Recipes</Nav.Link>
-            <Nav.Link as={Link} to="/dietplan">Diet Plan</Nav.Link>
+            <Nav.Link as={Link} to="/diet">Diet Plan</Nav.Link>
           </Nav>
           <div className="text-light mx-auto">{currentDate}</div>
           <Nav>
