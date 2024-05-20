@@ -78,7 +78,7 @@ const DietPlanner = () => {
             </div>
           </div>
           <div className="text-center">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-success">
               Generate Diet Plan
             </button>
           </div>

@@ -33,7 +33,7 @@ export default function Login() {
       });
       if (response.status === 200) {
         localStorage.setItem('jwtToken', response.data.token);
-        navigate('/food');
+        navigate('/');
       }
     } catch (error) {
       setLoginErr('Invalid Username or Password');
