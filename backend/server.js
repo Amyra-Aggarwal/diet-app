@@ -164,6 +164,25 @@ app.post('/get-recipes', async (req, res) => {
   }
 });
 
+// Route to fetch perticular recipe
+app.post('/get-recipes', async (req, res) => {
+  const { recipeId } = req.body;
+  try {
+    const { access_token } = await Token.findOne({});
+    const url = `https://platform.fatsecret.com/rest/server.api?method=recipes.get.v2&recipe_id=${recipeId}&format=json`;
+    const response = await axios.post(url, {}, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch recipe' });
+  }
+});
+
 // Diet Plan Gemini Api
 const genAI = new GoogleGenerativeAI("AIzaSyDp-tmArVcZ9EcHdowr0Xe-2it1Yb8Zv2s");
 

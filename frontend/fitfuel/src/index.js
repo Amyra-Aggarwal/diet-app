@@ -8,6 +8,7 @@ import SearchRecipes from "./SearchRecipes";
 import Home from "./Home";
 import DietPlanner from "./DietPlanner";
 import RecipeDetails from "./RecipeDetails";
+import WaterTracker from "./Watertracker";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: '/srecipe',
     element: <RecipeDetails></RecipeDetails>
+  },
+  {
+    path: '/water',
+    element: <WaterTracker></WaterTracker>,
   }
 ]);
 

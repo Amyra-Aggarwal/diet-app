@@ -48,7 +48,7 @@ export default function SearchRecipes() {
               className="form-control mr-2"
               name="query"
               type="text"
-              placeholder="Search Food"
+              placeholder="Search Recipe"
               value={recipeName}
               onChange={handleInput}
               style={{ marginRight: "8px" }}
