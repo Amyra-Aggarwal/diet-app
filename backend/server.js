@@ -165,11 +165,11 @@ app.post('/get-recipes', async (req, res) => {
 });
 
 // Route to fetch perticular recipe
-app.post('/get-recipes', async (req, res) => {
+app.post('/give-recipe', async (req, res) => {
   const { recipeId } = req.body;
   try {
     const { access_token } = await Token.findOne({});
-    const url = `https://platform.fatsecret.com/rest/server.api?method=recipes.get.v2&recipe_id=${recipeId}&format=json`;
+    const url = `https://platform.fatsecret.com/rest/server.api?method=recipe.get.v2&recipe_id=${recipeId}&format=json`;
     const response = await axios.post(url, {}, {
       headers: {
         Authorization: `Bearer ${access_token}`,

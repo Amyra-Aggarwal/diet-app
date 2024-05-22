@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import RecipeDetails from './RecipeDetails';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -9,7 +7,7 @@ function RecipeCard({ data }) {
   const navigate= useNavigate();
 
   const toggleDetails = () => {
-    <RecipeDetails data={data} />
+    localStorage.setItem('recipeid', data.recipe_id);
     navigate('/srecipe')
   };
 
@@ -34,7 +32,6 @@ function RecipeCard({ data }) {
           <div className="mt-auto w-100">
             <Button variant="success" onClick={toggleDetails}>View Recipe</Button>
           </div>
-          {/* <RecipeDetails data={data} /> */}
         </Card.Body>
       </Card>
     </div>

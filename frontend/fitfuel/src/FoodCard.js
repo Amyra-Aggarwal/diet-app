@@ -1,40 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function FoodCard({ data }) {
-  const [imageUrl, setImageUrl] = useState('');
+  const imageUrl = data.food_images && data.food_images.food_image.length > 0
+    ? data.food_images.food_image[0].image_url
+    : 'https://via.placeholder.com/200';
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const response = await axios.get(data.food_url);
-        const html = response.data;
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const imageElement = doc.querySelector('img');
-        const imageSrc = imageElement ? imageElement.src : '';
-        setImageUrl(imageSrc);
-      } catch (error) {
-        console.error('Error fetching image:', error);
-      }
-    };
-
-    fetchImage();
-  }, [data.food_url]);
+  const { servings } = data;
+  const firstServing = servings && servings.serving.length > 0 ? servings.serving[0] : {};
+  const { calories = 'N/A', carbohydrate = 'N/A', fat = 'N/A', protein = 'N/A' } = firstServing;
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={imageUrl} alt={data.food_name} />
-      <Card.Body>
-        <Card.Title>{data.food_name}</Card.Title>
-        <Card.Text>
-          Nutritional Description: {data.food_description}
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <div className="col-md-3 mb-4 d-flex">
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={imageUrl} alt={data.food_name} style={{ height: '200px', objectFit: 'cover' }} />
+        <Card.Body className="d-flex flex-column">
+          <Card.Title>{data.food_name}</Card.Title>
+          <Card.Text>
+            Calories: {calories}<br />
+            Carbohydrates: {carbohydrate}<br />
+            Fats: {fat}<br />
+            Protein: {protein}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 

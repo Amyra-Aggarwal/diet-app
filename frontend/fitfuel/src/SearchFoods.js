@@ -17,13 +17,12 @@ export default function SearchFoods() {
 
     axios.post("http://localhost:3000/get-token").then((response) => {
       const token = response.data.access_token;
-      console.log(token);
       
       axios
         .post("http://localhost:3000/get-foods", { foodName: foodName })
         .then((response) => {
-          console.log(response);
-          const foods = response.data.foods.food;
+          console.log(response.data.foods_search.results.food);
+          const foods = response.data.foods_search.results.food;
           setFoods(foods);
         })
         .catch((error) => {
