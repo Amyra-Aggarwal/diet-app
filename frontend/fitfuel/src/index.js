@@ -17,10 +17,6 @@ function App() {
     setIsLoggedIn(true);
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   return (
     <Router>
       <Routes>

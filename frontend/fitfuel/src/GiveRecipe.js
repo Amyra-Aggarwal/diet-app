@@ -20,7 +20,8 @@ export default function GiveRecipe() {
 
     axios.post("http://localhost:3000/get-token").then((response) => {
       const token = response.data.access_token;
-
+      console.log(token);
+      
       axios
         .post("http://localhost:3000/give-recipe", { recipeId: recipe_id })
         .then((response) => {

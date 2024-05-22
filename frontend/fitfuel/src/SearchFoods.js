@@ -17,6 +17,7 @@ export default function SearchFoods() {
 
     axios.post("http://localhost:3000/get-token").then((response) => {
       const token = response.data.access_token;
+      console.log(token);
       
       axios
         .post("http://localhost:3000/get-foods", { foodName: foodName })
