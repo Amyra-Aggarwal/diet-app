@@ -7,9 +7,8 @@ function GiveRecipeCard({ data }) {
     ? data.recipe_images.recipe_image[0]
     : 'https://via.placeholder.com/200';
 
-  const { servings } = data;
-  const firstServing = servings && servings.serving.length > 0 ? servings.serving[0] : {};
-  const { calories = 'N/A', carbohydrate = 'N/A', fat = 'N/A', protein = 'N/A' } = firstServing;
+  const servings = data.serving_sizes && data.serving_sizes.serving ? data.serving_sizes.serving : {};
+  const { calories = 'N/A', carbohydrate = 'N/A', fat = 'N/A', protein = 'N/A' } = servings;
 
   const directions = data.directions && data.directions.direction ? data.directions.direction : [];
   const ingredients = data.ingredients && data.ingredients.ingredient ? data.ingredients.ingredient : [];

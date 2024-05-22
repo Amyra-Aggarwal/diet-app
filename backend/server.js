@@ -184,7 +184,98 @@ app.post('/give-recipe', async (req, res) => {
 });
 
 // Diet Plan Gemini Api
+
 const genAI = new GoogleGenerativeAI("AIzaSyDMbmUsLRcFOVDFuJXg21ZtwaoFEJ0mbhM");
+
+// Function to generate a random meal plan
+const generateRandomMealPlan = () => {
+    const mealOptions = {
+        breakfast: [
+            'Oatmeal with berries and nuts (1 cup oatmeal, 1/2 cup berries, 1/4 cup nuts)',
+            'Greek yogurt with fruit and granola (1 cup yogurt, 1/2 banana, 1/4 cup granola)',
+            'Whole-wheat toast with avocado and eggs (2 slices toast, 1/2 avocado, 2 eggs)',
+            'Smoothie with spinach, banana, and protein powder (300 calories)',
+            'Scrambled eggs with vegetables and whole-grain toast (400 calories)',
+            'Chia seed pudding with almond milk and mixed fruits (200 calories)',
+            'Cottage cheese with pineapple and walnuts (300 calories)',
+            'Peanut butter and banana sandwich on whole-grain bread (400 calories)',
+            'Vegetable omelette with salsa and whole-grain toast (350 calories)',
+            'Quinoa porridge with almond milk and sliced almonds (300 calories)',
+            'Avocado toast with cherry tomatoes and feta cheese (300 calories)',
+            'Blueberry pancakes with Greek yogurt and maple syrup (450 calories)',
+            'Breakfast burrito with scrambled eggs, black beans, and salsa (400 calories)',
+            'Whole-grain cereal with skim milk and sliced strawberries (250 calories)',
+            'Banana and almond butter smoothie with flaxseeds (350 calories)',
+            // Add more breakfast options here
+        ],
+        lunch: [
+            'Salad with grilled chicken, vegetables, and quinoa (1 cup salad mix, 1/2 cup grilled chicken, 1 cup vegetables, 1/2 cup quinoa)',
+            'Sandwich on whole-wheat bread with turkey, lettuce, and mustard (350 calories)',
+            'Leftover stir-fry with tofu, vegetables, and brown rice (500 calories)',
+            'Vegetable wrap with hummus and mixed greens (300 calories)',
+            'Sushi rolls with brown rice, salmon, and avocado (450 calories)',
+            'Turkey and vegetable soup with whole-grain crackers (350 calories)',
+            'Quinoa salad with black beans, corn, and avocado (400 calories)',
+            'Grilled chicken Caesar salad with whole-grain croutons (450 calories)',
+            'Caprese salad with tomatoes, mozzarella, and basil (300 calories)',
+            'Mediterranean grain bowl with falafel, couscous, and tzatziki (450 calories)',
+            'Vegetable stir-fry with tofu and brown rice noodles (400 calories)',
+            'Bean and vegetable chili with a side of whole-grain bread (450 calories)',
+            'Pita pocket with grilled vegetables and tahini sauce (350 calories)',
+            'Chicken and vegetable curry with quinoa (500 calories)',
+            'Spinach and feta stuffed chicken breast with roasted potatoes (450 calories)',
+            // Add more lunch options here
+        ],
+        dinner: [
+            'Grilled salmon with roasted vegetables (450 calories)',
+            'Vegetarian chili with whole-wheat bread (400 calories)',
+            'Chicken stir-fry with brown rice (500 calories)',
+            'Baked cod with lemon and herbs, served with steamed broccoli (400 calories)',
+            'Pasta primavera with mixed vegetables and marinara sauce (400 calories)',
+            'Tofu and vegetable kebabs with quinoa pilaf (450 calories)',
+            'Turkey meatballs with marinara sauce and spaghetti squash (350 calories)',
+            'Shrimp and vegetable stir-fry with udon noodles (450 calories)',
+            'Eggplant Parmesan with a side of whole-grain pasta (400 calories)',
+            'Teriyaki chicken with stir-fried vegetables and brown rice (500 calories)',
+            'Vegetable lasagna with a side of mixed greens (450 calories)',
+            'Beef and broccoli stir-fry with jasmine rice (450 calories)',
+            'Stuffed bell peppers with lean ground turkey and quinoa (400 calories)',
+            'Grilled portobello mushrooms with polenta and roasted vegetables (350 calories)',
+            'Honey mustard glazed pork tenderloin with sweet potatoes (450 calories)',
+            // Add more dinner options here
+        ],
+        snacks: [
+            'Fruits (apple, banana, orange)',
+            'Vegetables (carrots, celery, cucumbers)',
+            'Air-popped popcorn',
+            'Nuts (1/4 cup Greek yogurt with honey and almonds (150 calories)',
+            'Cheese and whole-grain crackers (200 calories)',
+            'Cottage cheese with sliced peaches (100 calories)',
+            'Carrot and cucumber sticks with hummus (100 calories)',
+            'Hard-boiled eggs (70 calories each)',
+            'Apple slices with peanut butter (150 calories)',
+            'Mixed berries with low-fat whipped cream (100 calories)',
+            'Granola bar (150 calories)',
+            'Trail mix with dried fruits and nuts (200 calories)',
+            'Rice cakes with almond butter (150 calories)',
+            'Dark chocolate squares (60 calories each)',
+            // Add more snack options here
+        ],
+    };
+
+    // Generate a random meal plan
+    const randomMealPlan = {
+        breakfast: getRandomItem(mealOptions.breakfast),
+        lunch: getRandomItem(mealOptions.lunch),
+        dinner: getRandomItem(mealOptions.dinner),
+        snacks: [getRandomItem(mealOptions.snacks), getRandomItem(mealOptions.snacks)],
+    };
+
+    return randomMealPlan;
+};
+
+// Function to get a random item from an array
+const getRandomItem = (array) => array[Math.floor(Math.random() * array.length)];
 
 app.post('/generate-diet-plan', async (req, res) => {
     const { currentWeight, height, idealWeight, userId } = req.body;
@@ -193,23 +284,25 @@ app.post('/generate-diet-plan', async (req, res) => {
     const nbmi = (idealWeight / (height * height)) * 10000;
 
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    const prompt = `Current BMI: ${bmi}\n\nGoal BMI: ${nbmi}\n\nCalorie Deficit Required: Between 500-750 calories per day\n\nDiet Plan\n\nBreakfast\n- Oatmeal with berries and nuts (1 cup oatmeal, 1/2 cup berries, 1/4 cup nuts)\n- Greek yogurt with fruit and granola (1 cup yogurt, 1/2 banana, 1/4 cup granola)\n- Whole-wheat toast with avocado and eggs (2 slices toast, 1/2 avocado, 2 eggs)\n\nLunch\n- Salad with grilled chicken, vegetables, and quinoa (1 cup salad mix, 1/2 cup grilled chicken, 1 cup vegetables, 1/2 cup quinoa)\n- Sandwich on whole-wheat bread with lean protein, vegetables, and low-fat cheese (2 slices bread, 1/4 cup protein, 1 cup vegetables, 1/4 cup cheese)\n- Leftovers from dinner\n\nDinner\n- Grilled salmon with roasted vegetables (4 ounces salmon, 1 cup roasted vegetables)\n- Vegetarian chili with whole-wheat bread (1 bowl chili, 1 slice bread)\n- Chicken stir-fry with brown rice (1 cup stir-fry, 1/2 cup brown rice)\n\nSnacks\n- Fruits (apple, banana, orange)\n- Vegetables (carrots, celery, cucumbers)\n- Air-popped popcorn\n- Nuts (1/4 cup)\n\nHydration\n- Drink plenty of water throughout the day\n- Avoid sugary drinks\n\nAdditional Tips\n- Cook meals at home more often to control calorie intake\n- Read food labels carefully and choose foods low in calories and fat\n- Limit processed foods, sugary snacks, and unhealthy fats\n- Exercise regularly\n- Consult a registered dietitian or your healthcare provider for personalized guidance\n\nNote: This is just a sample diet plan, and individual needs may vary. Adjust caloric intake and food choices as needed to achieve a calorie deficit of 500-750 calories per day.`;
+    const prompt = `
+        Current BMI: ${bmi}\n\nGoal BMI: ${nbmi}\n\nCalorie Deficit Required: Between 500-750 calories per day\n\nDiet Plan\n\nBreakfast\n- ${generateRandomMealPlan().breakfast}\n\nLunch\n- ${generateRandomMealPlan().lunch}\n\nDinner\n- ${generateRandomMealPlan().dinner}\n\nSnacks\n- ${generateRandomMealPlan().snacks[0]}\n- ${generateRandomMealPlan().snacks[1]}\n\nHydration\n- Drink plenty of water throughout the day\n- Avoid sugary drinks\n\nAdditional Tips\n- Cook meals at home more often to control calorie intake\n- Read food labels carefully and choose foods low in calories and fat\n- Limit processed foods, sugary snacks, and unhealthy fats\n- Exercise regularly\n- Consult a registered dietitian or your healthcare provider for personalized guidance\n\nNote: This is just a sample diet plan, and individual needs may vary. Adjust caloric intake and food choices as needed to achieve a calorie deficit of 500-750 calories per day.`;
 
-    try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = await response.text();
-
-        text = text.replace(/\*\*/g, '');
-
-        const lines = text.split('\n');
-
-        res.json({ dietPlan: lines });
-    } catch (error) {
-        console.error("Error generating diet plan:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
+        try {
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            let text = await response.text();
+    
+            // Remove asterisks from the text
+            text = text.replace(/\*/g, '');
+    
+            const lines = text.split('\n');
+    
+            res.json({ dietPlan: lines });
+        } catch (error) {
+            console.error("Error generating diet plan:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    });
 
 const port = 3000;
 app.listen(port, () => {

@@ -13,7 +13,7 @@ import GiveRecipe from "./GiveRecipe";
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Login></Login>,
+    element: <Signup></Signup>,
   },
   {
     path: '/login',

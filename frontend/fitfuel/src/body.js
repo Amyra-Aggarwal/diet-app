@@ -8,7 +8,6 @@ function Body() {
   return (
     <div>
       <Card className="mx-auto" border="primary" style={{ width: '870px', height: '150px', borderRadius: '10px' }}>
-        {/* <Card.Header className='bg-primary'></Card.Header> */}
         <Card.Body className="d-flex align-items-center justify-content-between">
           <div>
             <Card.Title className='watertitle' >Water</Card.Title>
@@ -17,7 +16,7 @@ function Body() {
           <Link to='/water'>
             <Button variant="primary" style={{ background: 'lightblue', color: 'darkblue', border: 'none', width: '170px', height: '40px' }}>
               <strong>Your AquaAlert</strong>
-              <span style={{ marginLeft: '5px' }}> {/* Add margin-left for space */}
+              <span style={{ marginLeft: '5px' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#00008b" viewBox="0 0 264.564 264.564" width="20px" height="20px">
                   <g>
                     <g>
@@ -29,7 +28,6 @@ function Body() {
             </Button>
           </Link>
         </Card.Body>
-        {/* <Card.Footer className="bg-primary"></Card.Footer> */}
       </Card>
 
       <div>
