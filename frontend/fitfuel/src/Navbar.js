@@ -46,14 +46,14 @@ export default function Navbar() {
     <BootstrapNavbar bg="success" variant="dark" expand="lg">
       <Container fluid className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
-          <BootstrapNavbar.Brand as={Link} to="/" className="text-light mt-n2">
+          <BootstrapNavbar.Brand as={Link} to="/home" className="text-light mt-n2">
             <span style={{ fontWeight: 'bold', fontSize: 'xx-large', fontFamily: 'Itim' }}>
               <span style={{ color: 'Black', fontSize: 'xxx-large' }}>FIT</span>
               <span style={{ color: 'orange', fontSize: 'xx-large' }}>fuel</span>
             </span>
           </BootstrapNavbar.Brand>
           <Nav className="ml-3">
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link as={Link} to="/food">Food</Nav.Link>
             <Nav.Link as={Link} to="/recipe">Recipes</Nav.Link>
             <Nav.Link as={Link} to="/diet">Diet Plan</Nav.Link>

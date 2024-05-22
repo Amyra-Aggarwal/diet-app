@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import loadingImage from "./Components/logo.png";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -9,6 +10,7 @@ const DietPlanner = () => {
   const [idealWeight, setIdealWeight] = useState("");
   const [dietPlan, setDietPlan] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,6 +21,7 @@ const DietPlanner = () => {
     }
 
     try {
+      setLoading(true);
       const response = await fetch("http://localhost:3000/generate-diet-plan", {
         method: "POST",
         headers: {
@@ -36,6 +39,8 @@ const DietPlanner = () => {
       setError("");
     } catch (error) {
       setError("An error occurred while fetching data.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,7 +91,11 @@ const DietPlanner = () => {
         </form>
 
         <div id="responseContainer" className="mt-4">
-          {dietPlan.length > 0 && (
+          {loading ? (
+            <div className="text-center">
+              <img src={loadingImage} alt="Loading" style={{ width: "500px", height: "500px" }} />
+            </div>
+          ) : (
             <div className="card">
               {dietPlan.map((line, index) => (
                 <p key={index} className="card-text">

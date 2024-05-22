@@ -184,7 +184,7 @@ app.post('/give-recipe', async (req, res) => {
 });
 
 // Diet Plan Gemini Api
-const genAI = new GoogleGenerativeAI("AIzaSyDp-tmArVcZ9EcHdowr0Xe-2it1Yb8Zv2s");
+const genAI = new GoogleGenerativeAI("AIzaSyDMbmUsLRcFOVDFuJXg21ZtwaoFEJ0mbhM");
 
 app.post('/generate-diet-plan', async (req, res) => {
     const { currentWeight, height, idealWeight, userId } = req.body;
