@@ -22,7 +22,6 @@ export default function SearchFoods() {
       axios
         .post("http://localhost:3000/get-foods", { foodName: foodName })
         .then((response) => {
-          console.log(response.data.foods_search.results.food);
           const foods = response.data.foods_search.results.food;
           setFoods(foods);
         })
